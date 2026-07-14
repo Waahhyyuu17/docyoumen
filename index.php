@@ -25,13 +25,7 @@ session_start();
   <header class="site-header">
     <div class="header-inner">
       <div class="logo">
-        <div class="logo-mark">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M14 2v6h6M9 13h6M9 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <span class="logo-text">Doc<em>YouMen</em></span>
+        <img src="assets/logo.png" alt="DocYouMen" class="logo-img">
       </div>
       <nav class="header-nav">
         <a href="#toolGrid" class="nav-link">Tools</a>
@@ -1207,28 +1201,13 @@ foreach ($simpleConverters as $c): ?>
 <!-- FOOTER -->
 <footer class="site-footer">
   <div class="footer-inner">
-    <div class="footer-brand">
-      <div class="logo">
-        <div class="logo-mark">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
-            <path d="M14 2v6h6M9 13h6M9 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <span class="logo-text">Doc<em>YouMen</em></span>
-      </div>
-      <p class="footer-tagline">Edit, tanda tangani, dan konversi dokumen langsung di browser Anda — gratis dan privat.</p>
-    </div>
-
-    <div class="footer-col">
-      <h4 class="footer-heading">Navigasi</h4>
-      <a href="#toolGrid" class="footer-link">Semua Tools</a>
-      <a href="https://portofolio-wahyu.page.gd/" target="_blank" rel="noopener noreferrer" class="footer-link">Tentang Saya</a>
-    </div>
-
     <div class="footer-col footer-col-wide">
       <h4 class="footer-heading">Terhubung</h4>
       <div class="footer-social">
+        <a href="https://portofolio-wahyu.page.gd/" target="_blank" rel="noopener noreferrer" class="footer-pill" aria-label="Tentang Saya">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <span>Tentang Saya</span>
+        </a>
         <a href="https://github.com/Waahhyyuu17" target="_blank" rel="noopener noreferrer" class="footer-pill" aria-label="GitHub">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
           <span>GitHub</span>
