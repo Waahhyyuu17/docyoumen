@@ -1,0 +1,9 @@
+/vendor/
+/uploads/*
+!/uploads/.gitkeep
+/signatures/*
+!/signatures/.gitkeep
+/temp/*
+!/temp/.gitkeep
+/.claude/
+*.log
