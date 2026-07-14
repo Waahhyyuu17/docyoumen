@@ -151,6 +151,103 @@ body {
   letter-spacing: 0.3px;
 }
 
+/* ─── FOOTER ────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  margin-top: 40px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 32px 32px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1.6fr;
+  gap: 32px;
+}
+
+.footer-brand .logo { margin-bottom: 14px; }
+
+.footer-tagline {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 320px;
+}
+
+.footer-heading {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--text2);
+  margin-bottom: 16px;
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer-link {
+  font-size: 14px;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover { color: var(--text); }
+
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.footer-pill svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+.footer-pill:hover {
+  border-color: rgba(99,102,241,0.4);
+  background: rgba(99,102,241,0.1);
+  color: var(--text);
+  transform: translateY(-2px);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding: 18px 32px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.footer-bottom a {
+  color: var(--text2);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-bottom a:hover { color: var(--accent); }
+
 /* ─── HERO ──────────────────────────────────── */
 .hero {
   max-width: 1320px;
@@ -1441,6 +1538,9 @@ body {
   .tool-card { padding: 16px 14px 14px; }
   .canvas-toolbar { flex-wrap: wrap; gap: 8px; }
   .canvas-toolbar-center { order: 3; width: 100%; justify-content: center; }
+  .footer-inner { grid-template-columns: 1fr; padding: 40px 20px 28px; gap: 28px; }
+  .footer-tagline { max-width: none; }
+  .footer-bottom { padding: 16px 20px; }
 }
 
 @media (max-width: 560px) {
