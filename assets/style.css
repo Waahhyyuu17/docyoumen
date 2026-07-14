@@ -357,32 +357,18 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 8px 24px;
 }
 
-.footer-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: var(--surface2);
-  color: var(--text2);
+.footer-social a {
+  color: var(--muted);
   font-size: 13px;
   font-weight: 500;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
 }
 
-.footer-pill svg { width: 15px; height: 15px; flex-shrink: 0; }
-
-.footer-pill:hover {
-  border-color: rgba(99,102,241,0.4);
-  background: rgba(99,102,241,0.1);
-  color: var(--text);
-  transform: translateY(-2px);
-}
+.footer-social a:hover { color: var(--text); }
 
 .footer-bottom {
   max-width: 1200px;

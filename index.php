@@ -1199,30 +1199,12 @@ foreach ($simpleConverters as $c): ?>
   <div class="footer-bottom">
     <span>&copy; <?= date('Y') ?> <a href="https://portofolio-wahyu.page.gd/" target="_blank" rel="noopener noreferrer" class="footer-name">Wahyu Ardiansyah</a>. Dirancang dan dikembangkan secara mandiri dengan PHP dan secangkir kopi.</span>
     <div class="footer-social">
-      <a href="https://portofolio-wahyu.page.gd/" target="_blank" rel="noopener noreferrer" class="footer-pill" aria-label="Tentang Saya">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        <span>Tentang Saya</span>
-      </a>
-      <a href="https://github.com/Waahhyyuu17" target="_blank" rel="noopener noreferrer" class="footer-pill" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
-        <span>GitHub</span>
-      </a>
-      <a href="https://instagram.com/waahhyyuu17" target="_blank" rel="noopener noreferrer" class="footer-pill" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/></svg>
-        <span>Instagram</span>
-      </a>
-      <a href="https://wa.me/6289676658564" target="_blank" rel="noopener noreferrer" class="footer-pill" aria-label="WhatsApp">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91C21.96 6.45 17.51 2 12.04 2zm0 18.1a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.18 8.18 0 1 1 6.98 3.86zm4.48-6.13c-.25-.12-1.45-.72-1.68-.8-.22-.08-.39-.12-.55.12-.16.25-.63.8-.78.96-.14.16-.29.18-.54.06-.25-.12-1.04-.38-1.99-1.22-.73-.65-1.23-1.46-1.37-1.71-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.55-1.32-.75-1.81-.2-.48-.4-.41-.55-.42h-.47c-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.04 0 1.2.88 2.36 1 2.52.12.16 1.73 2.64 4.2 3.7.59.25 1.05.4 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.45-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.47-.28z"/></svg>
-        <span>WhatsApp</span>
-      </a>
-      <a href="https://linkedin.com/in/wahyu-ardiansyah-0622a226a" target="_blank" rel="noopener noreferrer" class="footer-pill" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4v1.5A5.9 5.9 0 0 1 16 8z"/><rect x="2" y="8" width="4" height="13"/><circle cx="4" cy="4" r="2"/></svg>
-        <span>linkedin.com</span>
-      </a>
-      <a href="mailto:wahyuardiansyah1701@gmail.com" class="footer-pill" aria-label="Email">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        <span>Email</span>
-      </a>
+      <a href="https://portofolio-wahyu.page.gd/" target="_blank" rel="noopener noreferrer">Tentang Saya</a>
+      <a href="https://github.com/Waahhyyuu17" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://instagram.com/waahhyyuu17" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://wa.me/6289676658564" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+      <a href="https://linkedin.com/in/wahyu-ardiansyah-0622a226a" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="mailto:wahyuardiansyah1701@gmail.com">Email</a>
     </div>
   </div>
 </footer>
