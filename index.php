@@ -67,7 +67,7 @@ session_start();
     <div class="tool-grid" id="toolGrid">
       <div class="tool-card" data-overlay="editorOverlay" data-category="sign">
         <div class="tool-card-icon c-indigo"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M3 17c3.333-5.333 6.667-8 10-8s6.667 2.667 10 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <h3>Tanda Tangan</h3>
+        <h3>Signature</h3>
         <p>Edit, tanda tangan & stempel PDF</p>
       </div>
       <div class="tool-card" data-overlay="splitOverlay" data-category="organize">
@@ -82,22 +82,22 @@ session_start();
       </div>
       <div class="tool-card" data-overlay="pdf2jpgOverlay" data-category="convert">
         <div class="tool-card-icon c-pink"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" stroke-width="2"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>PDF ke JPG</h3>
+        <h3>PDF to JPG</h3>
         <p>Ubah tiap halaman PDF jadi gambar</p>
       </div>
       <div class="tool-card" data-overlay="jpg2pdfOverlay" data-category="convert">
         <div class="tool-card-icon c-pink"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="1.5"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="1.5"/><path d="M12 18v-6M9 15l3-3 3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>JPG ke PDF</h3>
+        <h3>JPG to PDF</h3>
         <p>Gabungkan gambar jadi satu PDF</p>
       </div>
       <div class="tool-card" data-overlay="pdf2wordOverlay" data-category="convert">
         <div class="tool-card-icon c-amber"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="1.5"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="1.5"/><path d="M9 13h6M9 17h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
-        <h3>PDF ke Word</h3>
+        <h3>PDF to Word</h3>
         <p>Ekstrak teks PDF ke .docx</p>
       </div>
       <div class="tool-card" data-overlay="word2pdfOverlay" data-category="convert">
         <div class="tool-card-icon c-amber"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 7V4h16v3M9 20h6M12 4v16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <h3>Word ke PDF</h3>
+        <h3>Word to PDF</h3>
         <p>Konversi dokumen .docx ke PDF</p>
       </div>
       <div class="tool-card" data-overlay="compressOverlay" data-category="organize">
@@ -107,27 +107,27 @@ session_start();
       </div>
       <div class="tool-card" data-overlay="pagenumOverlay" data-category="organize">
         <div class="tool-card-icon c-green"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><line x1="4" y1="9" x2="20" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="15" x2="20" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="10" y1="3" x2="8" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="16" y1="3" x2="14" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <h3>Nomor Halaman</h3>
+        <h3>Page Numbers</h3>
         <p>Tambah nomor halaman otomatis</p>
       </div>
       <div class="tool-card" data-overlay="excel2pdfOverlay" data-category="convert">
         <div class="tool-card-icon c-amber"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="2"/></svg></div>
-        <h3>Excel ke PDF</h3>
+        <h3>Excel to PDF</h3>
         <p>Konversi spreadsheet .xlsx ke PDF</p>
       </div>
       <div class="tool-card" data-overlay="pdf2excelOverlay" data-category="convert">
         <div class="tool-card-icon c-amber"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 9h18M9 3v18" stroke="currentColor" stroke-width="2"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg></div>
-        <h3>PDF ke Excel</h3>
+        <h3>PDF to Excel</h3>
         <p>Ekstrak teks PDF ke .xlsx</p>
       </div>
       <div class="tool-card" data-overlay="ppt2pdfOverlay" data-category="convert">
         <div class="tool-card-icon c-amber"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 18v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <h3>PowerPoint ke PDF</h3>
+        <h3>PowerPoint to PDF</h3>
         <p>Konversi .pptx ke PDF</p>
       </div>
       <div class="tool-card" data-overlay="pdf2pptOverlay" data-category="convert">
         <div class="tool-card-icon c-amber"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 18v3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg></div>
-        <h3>PDF ke PowerPoint</h3>
+        <h3>PDF to PowerPoint</h3>
         <p>Ekstrak teks PDF ke .pptx</p>
       </div>
       <div class="tool-card" data-overlay="editTextOverlay" data-category="sign">
@@ -137,22 +137,22 @@ session_start();
       </div>
       <div class="tool-card" data-overlay="removePagesOverlay" data-category="organize">
         <div class="tool-card-icon c-green"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="1.5"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="1.5"/><line x1="9" y1="13" x2="15" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="15" y1="13" x2="9" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
-        <h3>Hapus Halaman</h3>
+        <h3>Remove Pages</h3>
         <p>Buang halaman tertentu dari PDF</p>
       </div>
       <div class="tool-card" data-overlay="removeBgOverlay" data-category="sign">
         <div class="tool-card-icon c-indigo"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 18c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2.2 2.2"/></svg></div>
-        <h3>Hapus Background</h3>
+        <h3>Remove Background</h3>
         <p>Hilangkan latar foto orang atau tanda tangan otomatis/manual</p>
       </div>
       <div class="tool-card" data-overlay="compareDocOverlay" data-category="analysis">
         <div class="tool-card-icon c-pink"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="18" rx="1" stroke="currentColor" stroke-width="2"/><rect x="13" y="3" width="8" height="18" rx="1" stroke="currentColor" stroke-width="2"/><path d="M11 8l2 4-2 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Cek Kemiripan Dokumen</h3>
+        <h3>Check Plagiarism</h3>
         <p>Bandingkan 2 dokumen yang diupload (bukan cek ke internet)</p>
       </div>
       <div class="tool-card" data-overlay="aiCheckOverlay" data-category="analysis">
         <div class="tool-card-icon c-pink"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M12 8v4l2.5 2.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Cek Pola AI</h3>
+        <h3>Check AI</h3>
         <p>Perkiraan kasar pola teks (bukan detektor akurat)</p>
       </div>
     </div>
