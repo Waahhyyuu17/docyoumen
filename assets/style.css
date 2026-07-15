@@ -548,6 +548,7 @@ body {
   background: radial-gradient(ellipse at center, rgba(99,102,241,0.06) 0%, transparent 70%);
   opacity: 0;
   transition: opacity 0.3s;
+  pointer-events: none;
 }
 
 .upload-zone:hover,
