@@ -140,6 +140,11 @@ session_start();
         <h3>Hapus Halaman</h3>
         <p>Buang halaman tertentu dari PDF</p>
       </div>
+      <div class="tool-card" data-overlay="removeBgOverlay" data-category="sign">
+        <div class="tool-card-icon c-indigo"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="9.5" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M7 18c0-2.8 2.2-5 5-5s5 2.2 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2.2 2.2"/></svg></div>
+        <h3>Hapus Background</h3>
+        <p>Hilangkan latar foto orang atau tanda tangan otomatis/manual</p>
+      </div>
       <div class="tool-card" data-overlay="compareDocOverlay" data-category="analysis">
         <div class="tool-card-icon c-pink"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="18" rx="1" stroke="currentColor" stroke-width="2"/><rect x="13" y="3" width="8" height="18" rx="1" stroke="currentColor" stroke-width="2"/><path d="M11 8l2 4-2 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <h3>Cek Kemiripan Dokumen</h3>
@@ -655,11 +660,11 @@ session_start();
           <p class="panel-desc">Urutan file di antrian = urutan halaman PDF hasil.</p>
         </div>
         <label class="upload-sig-zone">
-          <input type="file" id="jpg2pdfFileInput" accept="image/*" multiple hidden>
+          <input type="file" id="jpg2pdfFileInput" accept="image/*,.heic,.heif" multiple hidden>
           <div class="upload-sig-inner" id="jpg2pdfDropzone">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
             <span>Klik atau drag gambar di sini</span>
-            <small>PNG, JPG — bisa lebih dari satu</small>
+            <small>PNG, JPG, HEIC — bisa lebih dari satu</small>
           </div>
         </label>
       </div>
@@ -1032,6 +1037,97 @@ foreach ($simpleConverters as $c): ?>
   </div>
 </div>
 
+<!-- ═══ HAPUS BACKGROUND ═══ -->
+<div class="editor-overlay" id="removeBgOverlay" style="display:none;">
+  <div class="editor-layout">
+    <aside class="tools-panel">
+      <div class="tools-header">
+        <button class="back-btn" data-back-overlay="removeBgOverlay" title="Kembali">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="tools-logo"><span>Hapus <em>Background</em></span></div>
+      </div>
+      <div class="tools-file-info" id="removeBgFileInfo" style="display:none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2"/><path d="M14 2v6h6" stroke="currentColor" stroke-width="2"/></svg>
+        <span id="removeBgFileName"></span>
+      </div>
+
+      <div class="tool-panel active" style="flex:1;overflow-y:auto;">
+        <!-- UPLOAD STEP -->
+        <div id="removeBgUploadStep">
+          <div class="panel-section">
+            <label class="panel-label">Upload Gambar</label>
+            <p class="panel-desc">Foto orang atau tanda tangan — background akan dihilangkan, hasil PNG transparan.</p>
+          </div>
+          <label class="upload-sig-zone">
+            <input type="file" id="removeBgFileInput" accept="image/*" hidden>
+            <div class="upload-sig-inner" id="removeBgDropzone">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              <span>Klik atau drag gambar di sini</span>
+              <small>PNG, JPG, WEBP</small>
+            </div>
+          </label>
+        </div>
+
+        <!-- WORK STEP -->
+        <div id="removeBgWorkStep" style="display:none;">
+          <div class="panel-section">
+            <label class="panel-label">Deteksi Otomatis</label>
+            <select class="panel-select" id="removeBgMode">
+              <option value="person">Orang / Foto (AI)</option>
+              <option value="color">Tanda Tangan / Latar Polos (Warna)</option>
+            </select>
+          </div>
+          <div class="panel-section" id="removeBgToleranceWrap" style="display:none;">
+            <label class="panel-label">Toleransi Warna</label>
+            <input type="range" class="panel-range" id="removeBgTolerance" min="5" max="100" value="35">
+            <span class="range-val" id="removeBgToleranceVal">35</span>
+          </div>
+          <button class="btn-add-element" id="removeBgAutoBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M5.6 5.6l2.1 2.1m8.6 8.6l2.1 2.1M18.4 5.6l-2.1 2.1m-8.6 8.6l-2.1 2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            Hapus Otomatis
+          </button>
+
+          <div class="panel-section" style="margin-top:22px;">
+            <label class="panel-label">Kuas Manual</label>
+            <div class="style-btns" id="removeBgBrushMode">
+              <button class="style-btn active" data-brushmode="erase" style="width:auto;padding:0 12px;">Hapus</button>
+              <button class="style-btn" data-brushmode="restore" style="width:auto;padding:0 12px;">Kembalikan</button>
+            </div>
+          </div>
+          <div class="panel-section">
+            <label class="panel-label">Ukuran Kuas</label>
+            <input type="range" class="panel-range" id="removeBgBrushSize" min="5" max="150" value="30">
+            <span class="range-val" id="removeBgBrushSizeVal">30px</span>
+          </div>
+          <div class="panel-row" style="gap:8px;">
+            <button class="btn-clear" id="removeBgUndoBtn" style="flex:1;">Undo</button>
+            <button class="btn-clear" id="removeBgResetBtn" style="flex:1;">Reset</button>
+          </div>
+
+          <button class="btn-add-element" id="removeBgDownloadBtn" style="margin-top:22px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Download PNG
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="canvas-area">
+      <div class="canvas-toolbar">
+        <div class="canvas-toolbar-left"><span class="page-info" id="removeBgStatus">Hapus Background</span></div>
+      </div>
+      <div class="pdf-viewport">
+        <div class="empty-hint" id="removeBgEmptyHint"><span class="empty-hint-icon">🖼️</span><p>Upload gambar di panel kiri untuk mulai.</p></div>
+        <div class="removebg-canvas-wrap" id="removeBgCanvasWrap" style="display:none;">
+          <canvas id="removeBgCanvas"></canvas>
+          <div class="brush-cursor" id="removeBgBrushCursor"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
 <!-- ═══ CEK KEMIRIPAN DOKUMEN ═══ -->
 <div class="editor-overlay" id="compareDocOverlay" style="display:none;">
   <div class="editor-layout">
@@ -1272,5 +1368,6 @@ foreach ($simpleConverters as $c): ?>
 <script src="assets/editpdf.js"></script>
 <script src="assets/textanalysis.js"></script>
 <script src="assets/contact.js"></script>
+<script src="assets/removebg.js"></script>
 </body>
 </html>

@@ -286,11 +286,23 @@ function setupJpg2PdfTool() {
   const input = document.getElementById('jpg2pdfFileInput');
   setupGenericUpload({
     dropzone, input, onFiles: files => {
-      [...files].forEach(f => { if (f.type.startsWith('image/')) jpg2pdfQueue.push(f); });
+      [...files].forEach(f => { if (f.type.startsWith('image/') || isHeicFile(f)) jpg2pdfQueue.push(f); });
       renderJpg2PdfQueue();
     }
   });
   document.getElementById('jpg2pdfRunBtn').addEventListener('click', runJpg2Pdf);
+}
+
+// HEIC/HEIF sering dikirim browser dengan MIME kosong/octet-stream, jadi cek ekstensi juga
+function isHeicFile(file) {
+  return /\.(heic|heif)$/i.test(file.name) || /image\/hei(c|f)/i.test(file.type);
+}
+
+const HEIC2ANY_URL = 'https://cdn.jsdelivr.net/npm/heic2any/dist/heic2any.min.js';
+async function heicToJpegBlob(file) {
+  await loadScriptOnce(HEIC2ANY_URL);
+  const result = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 });
+  return Array.isArray(result) ? result[0] : result;
 }
 
 function renderJpg2PdfQueue() {
@@ -315,7 +327,12 @@ async function runJpg2Pdf() {
   try {
     const { jsPDF } = window.jspdf;
     let doc = null;
-    for (const file of jpg2pdfQueue) {
+    for (let file of jpg2pdfQueue) {
+      if (isHeicFile(file)) {
+        showBusy('Mengonversi HEIC (' + file.name + ')...');
+        file = await heicToJpegBlob(file);
+        showBusy('Membuat PDF dari gambar...');
+      }
       const dataUrl = await new Promise(resolve => {
         const r = new FileReader(); r.onload = e => resolve(e.target.result); r.readAsDataURL(file);
       });

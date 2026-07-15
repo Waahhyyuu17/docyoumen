@@ -2011,6 +2011,41 @@ body {
   line-height: 1.7;
 }
 
+/* ─── REMOVE BACKGROUND ───────────────────────── */
+.removebg-canvas-wrap {
+  position: relative;
+  margin: auto;
+  display: inline-block;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.04);
+  background-image:
+    linear-gradient(45deg, #4b4b58 25%, transparent 25%),
+    linear-gradient(-45deg, #4b4b58 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #4b4b58 75%),
+    linear-gradient(-45deg, transparent 75%, #4b4b58 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  background-color: #2a2a35;
+}
+
+#removeBgCanvas {
+  display: block;
+  max-width: 100%;
+  cursor: none;
+}
+
+.brush-cursor {
+  position: absolute;
+  border: 1.5px solid rgba(255,255,255,0.85);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1.5px rgba(0,0,0,0.5);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  display: none;
+  z-index: 5;
+}
+
 /* ─── TEXT ELEMENT ────────────────────────────── */
 .text-content {
   outline: none;

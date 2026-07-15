@@ -21,6 +21,20 @@ function formatFileSize(bytes) {
   return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
 }
 
+// ─── LAZY SCRIPT LOADER ───────────────────────
+const _loadedScripts = {};
+function loadScriptOnce(url) {
+  if (_loadedScripts[url]) return _loadedScripts[url];
+  _loadedScripts[url] = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = url;
+    s.onload = () => resolve();
+    s.onerror = () => { delete _loadedScripts[url]; reject(new Error('Gagal memuat: ' + url)); };
+    document.head.appendChild(s);
+  });
+  return _loadedScripts[url];
+}
+
 // ─── DOWNLOAD ─────────────────────────────────
 function downloadBlob(blob, filename) {
   const url = URL.createObjectURL(blob);
