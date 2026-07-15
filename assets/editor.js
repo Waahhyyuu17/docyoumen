@@ -54,6 +54,10 @@ const dom = {
   get undoBtn()         { return document.getElementById('undoBtn'); },
   get uploadProgress()  { return document.getElementById('uploadProgress'); },
   get uploadProgressBar(){ return document.getElementById('uploadProgressBar'); },
+  get elementEditBar()   { return document.getElementById('elementEditBar'); },
+  get elementEditLabel() { return document.getElementById('elementEditLabel'); },
+  get btnSaveEl()        { return document.getElementById('btnSaveEl'); },
+  get btnDeleteEl()      { return document.getElementById('btnDeleteEl'); },
 };
 
 // ─── INIT ─────────────────────────────────────
@@ -70,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupStyleButtons();
   setupOverlayClick();
   setupClearAll();
+  setupElementEditBar();
 });
 
 // ─── UPLOAD ───────────────────────────────────
@@ -181,9 +186,19 @@ function setupSigTabs() {
 
 // ─── TEXT CONTROLS ────────────────────────────
 function setupTextControls() {
-  document.getElementById('textContent').addEventListener('input',  e => state.textStyle.content    = e.target.value);
-  document.getElementById('fontFamily').addEventListener('change',  e => state.textStyle.fontFamily = e.target.value);
-  document.getElementById('fontSize').addEventListener('input',     e => state.textStyle.fontSize   = parseInt(e.target.value)||16);
+  document.getElementById('textContent').addEventListener('input',  e => {
+    if (state.selectedElement) updateSelectedEl({ content: e.target.value });
+    else state.textStyle.content = e.target.value;
+  });
+  document.getElementById('fontFamily').addEventListener('change',  e => {
+    if (state.selectedElement) updateSelectedEl({ fontFamily: e.target.value });
+    else state.textStyle.fontFamily = e.target.value;
+  });
+  document.getElementById('fontSize').addEventListener('input',     e => {
+    const v = parseInt(e.target.value)||16;
+    if (state.selectedElement) updateSelectedEl({ fontSize: v });
+    else state.textStyle.fontSize = v;
+  });
   document.getElementById('addTextBtn').addEventListener('click', () => {
     if (!document.getElementById('textContent').value.trim()) { showToast('Ketik teks dulu!','error'); return; }
     startAddMode('text');
@@ -192,17 +207,32 @@ function setupTextControls() {
 function adjustFontSize(d) {
   const inp = document.getElementById('fontSize');
   inp.value = Math.max(6, Math.min(120,(parseInt(inp.value)||16)+d));
-  state.textStyle.fontSize = parseInt(inp.value);
+  const v = parseInt(inp.value);
+  if (state.selectedElement) updateSelectedEl({ fontSize: v });
+  else state.textStyle.fontSize = v;
 }
 function setupColorPicker() {
   const pk = document.getElementById('fontColor'), pv = document.getElementById('colorPreview');
-  pk.addEventListener('input', e => { state.textStyle.color = e.target.value; pv.style.background = e.target.value; });
+  pk.addEventListener('input', e => {
+    if (state.selectedElement) updateSelectedEl({ color: e.target.value });
+    else state.textStyle.color = e.target.value;
+    pv.style.background = e.target.value;
+  });
   pv.style.background = pk.value;
 }
 function setupStyleButtons() {
   document.querySelectorAll('.style-btn').forEach(btn => btn.addEventListener('click', () => {
-    const s = btn.dataset.style; state.textStyle[s] = !state.textStyle[s];
-    btn.classList.toggle('active', state.textStyle[s]);
+    const s = btn.dataset.style;
+    if (state.selectedElement) {
+      const el = state.elements.find(e => e.id === state.selectedElement);
+      if (!el) return;
+      el[s] = !el[s];
+      btn.classList.toggle('active', el[s]);
+      renderElements();
+    } else {
+      state.textStyle[s] = !state.textStyle[s];
+      btn.classList.toggle('active', state.textStyle[s]);
+    }
   }));
 }
 
@@ -368,12 +398,100 @@ function useStamp() {
 // ─── RANGES ───────────────────────────────────
 function setupRanges() {
   [
-    ['textOpacity',  'textOpacityVal',  v => state.textStyle.opacity = v/100, '%'],
-    ['stampOpacity', 'stampOpacityVal', () => {}, '%'],
-    ['stampSize',    'stampSizeVal',    () => {}, 'px'],
+    ['textOpacity',  'textOpacityVal',  v => {
+      if (state.selectedElement) updateSelectedEl({ opacity: v/100 });
+      else state.textStyle.opacity = v/100;
+    }, '%'],
+    ['stampOpacity', 'stampOpacityVal', v => {
+      if (state.selectedElement) updateSelectedEl({ opacity: v/100 });
+    }, '%'],
+    ['stampSize',    'stampSizeVal',    v => {
+      if (state.selectedElement) updateSelectedElSize(v);
+    }, 'px'],
+    ['sigOpacity',   'sigOpacityVal',   v => {
+      if (state.selectedElement) updateSelectedEl({ opacity: v/100 });
+    }, '%'],
+    ['sigSize',      'sigSizeVal',      v => {
+      if (state.selectedElement) updateSelectedElSize(v);
+    }, 'px'],
   ].forEach(([id, vid, cb, unit]) => {
     const el = document.getElementById(id); if (!el) return;
     el.addEventListener('input', e => { document.getElementById(vid).textContent = e.target.value+unit; cb(+e.target.value); });
+  });
+}
+
+// ─── SELECTED ELEMENT EDITING ─────────────────
+function updateSelectedEl(props) {
+  const el = state.elements.find(e => e.id === state.selectedElement);
+  if (!el) return;
+  Object.assign(el, props);
+  renderElements();
+}
+function updateSelectedElSize(newWidth) {
+  const el = state.elements.find(e => e.id === state.selectedElement);
+  if (!el) return;
+  const aspect = (el.width && el.height) ? el.height / el.width : 1;
+  el.width = newWidth;
+  el.height = Math.round(newWidth * aspect);
+  renderElements();
+}
+function syncPanelToElement(el) {
+  const tabBtn = document.querySelector(`.tool-tab[data-tool="${el.type}"]`);
+  if (tabBtn) tabBtn.click();
+
+  dom.elementEditBar.style.display = 'flex';
+  const typeLabel = el.type === 'text' ? 'Teks' : el.type === 'signature' ? 'Tanda Tangan' : 'Stempel';
+  dom.elementEditLabel.textContent = 'Mengedit: ' + typeLabel;
+
+  const op = Math.round((el.opacity !== undefined ? el.opacity : 1) * 100);
+
+  if (el.type === 'text') {
+    document.getElementById('textContent').value = el.content;
+    document.getElementById('fontFamily').value = el.fontFamily;
+    document.getElementById('fontSize').value = el.fontSize;
+    document.getElementById('fontColor').value = el.color;
+    document.getElementById('colorPreview').style.background = el.color;
+    ['bold','italic','underline'].forEach(s => {
+      const btn = document.getElementById('btn'+cap(s));
+      if (btn) btn.classList.toggle('active', !!el[s]);
+    });
+    document.getElementById('textOpacity').value = op;
+    document.getElementById('textOpacityVal').textContent = op+'%';
+  } else if (el.type === 'signature') {
+    document.getElementById('sigEditProps').style.display = 'block';
+    document.getElementById('sigEditSizeWrap').style.display = 'block';
+    document.getElementById('sigOpacity').value = op;
+    document.getElementById('sigOpacityVal').textContent = op+'%';
+    const w = Math.round(el.width||200);
+    document.getElementById('sigSize').value = w;
+    document.getElementById('sigSizeVal').textContent = w+'px';
+  } else if (el.type === 'stamp') {
+    document.getElementById('stampOpacity').value = op;
+    document.getElementById('stampOpacityVal').textContent = op+'%';
+    const w = Math.round(el.width||150);
+    document.getElementById('stampSize').value = w;
+    document.getElementById('stampSizeVal').textContent = w+'px';
+  }
+}
+function hideElementEditBar() {
+  dom.elementEditBar.style.display = 'none';
+  const sp = document.getElementById('sigEditProps'); if (sp) sp.style.display = 'none';
+  const ssw = document.getElementById('sigEditSizeWrap'); if (ssw) ssw.style.display = 'none';
+}
+function deselectElement() {
+  state.selectedElement = null;
+  dom.overlay.querySelectorAll('.pdf-element').forEach(d => d.classList.remove('selected'));
+  updateElementsList();
+  hideElementEditBar();
+}
+function saveEl() {
+  showToast('Perubahan disimpan', 'success');
+  deselectElement();
+}
+function setupElementEditBar() {
+  dom.btnSaveEl.addEventListener('click', saveEl);
+  dom.btnDeleteEl.addEventListener('click', () => {
+    if (state.selectedElement) deleteEl(state.selectedElement);
   });
 }
 
@@ -577,11 +695,13 @@ function buildElDOM(el) {
       <span style="font-size:10px;color:var(--muted);padding:0 4px;">${Math.round(el.width||200)}×${Math.round(el.height||100)}</span>
       <span style="font-size:10px;color:var(--muted);padding:0 4px;">${Math.round(el.rotation||0)}°</span>
       <button class="ec-btn" onclick="duplicateEl(${el.id})">Duplikat</button>
+      <button class="ec-btn save" onclick="saveEl()">Simpan</button>
       <button class="ec-btn delete" onclick="deleteEl(${el.id})">Hapus</button>`;
   } else {
     ctrl.innerHTML = `
       <button class="ec-btn" onclick="makeTextEditable(${el.id})">✏️ Edit</button>
       <button class="ec-btn" onclick="duplicateEl(${el.id})">Duplikat</button>
+      <button class="ec-btn save" onclick="saveEl()">Simpan</button>
       <button class="ec-btn delete" onclick="deleteEl(${el.id})">Hapus</button>`;
   }
   div.appendChild(ctrl);
@@ -699,10 +819,12 @@ function selectEl(id) {
   state.selectedElement = id;
   dom.overlay.querySelectorAll('.pdf-element').forEach(d => d.classList.toggle('selected', parseInt(d.dataset.id)===id));
   updateElementsList();
+  const el = state.elements.find(e => e.id === id);
+  if (el) syncPanelToElement(el);
 }
 function deleteEl(id) {
   state.elements = state.elements.filter(e => e.id!==id);
-  if (state.selectedElement===id) state.selectedElement=null;
+  if (state.selectedElement===id) { state.selectedElement=null; hideElementEditBar(); }
   renderElements(); updateElementsList(); showToast('Dihapus','info');
 }
 function duplicateEl(id) {
@@ -715,7 +837,7 @@ function undoElement() {
   const last = state.history.pop(); if (!last) return;
   if (last.action==='add') {
     state.elements = state.elements.filter(e => e.id!==last.elementId);
-    if (state.selectedElement===last.elementId) state.selectedElement=null;
+    if (state.selectedElement===last.elementId) { state.selectedElement=null; hideElementEditBar(); }
     renderElements(); updateElementsList(); showToast('Undo','info');
   }
   dom.undoBtn.disabled = state.history.length===0;
@@ -747,17 +869,13 @@ function setupClearAll() {
   document.getElementById('clearAllBtn').addEventListener('click', () => {
     if (!state.elements.length||!confirm('Hapus semua?')) return;
     state.elements=[]; state.history=[]; state.selectedElement=null;
-    dom.undoBtn.disabled=true; renderElements(); updateElementsList();
+    dom.undoBtn.disabled=true; renderElements(); updateElementsList(); hideElementEditBar();
     showToast('Semua dihapus','info');
   });
 }
 function setupOverlayClick() {
   dom.overlay.addEventListener('click', e => {
-    if (!e.target.closest('.pdf-element')) {
-      state.selectedElement=null;
-      dom.overlay.querySelectorAll('.pdf-element').forEach(d=>d.classList.remove('selected'));
-      updateElementsList();
-    }
+    if (!e.target.closest('.pdf-element')) deselectElement();
   });
 }
 

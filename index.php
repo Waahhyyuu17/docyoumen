@@ -217,6 +217,15 @@ session_start();
         </button>
       </div>
 
+      <!-- ELEMENT EDIT BAR (tampil saat elemen di kanvas dipilih) -->
+      <div class="element-edit-bar" id="elementEditBar" style="display:none;">
+        <span class="element-edit-label" id="elementEditLabel">Mengedit elemen</span>
+        <div class="element-edit-actions">
+          <button class="btn-save-el" id="btnSaveEl">Simpan</button>
+          <button class="btn-delete-el" id="btnDeleteEl">Hapus</button>
+        </div>
+      </div>
+
       <!-- TEXT TOOL PANEL -->
       <div class="tool-panel active" id="panelText">
         <div class="panel-section">
@@ -284,6 +293,16 @@ session_start();
 
       <!-- SIGNATURE TOOL PANEL -->
       <div class="tool-panel" id="panelSignature">
+        <div class="panel-section" id="sigEditProps" style="display:none;">
+          <label class="panel-label">Opacity</label>
+          <input type="range" class="panel-range" id="sigOpacity" min="10" max="100" value="100">
+          <span class="range-val" id="sigOpacityVal">100%</span>
+        </div>
+        <div class="panel-section" id="sigEditSizeWrap" style="display:none;">
+          <label class="panel-label">Ukuran</label>
+          <input type="range" class="panel-range" id="sigSize" min="50" max="400" value="200">
+          <span class="range-val" id="sigSizeVal">200px</span>
+        </div>
         <div class="sig-tabs">
           <button class="sig-tab active" data-sigtab="draw">✏️ Gambar</button>
           <button class="sig-tab" data-sigtab="upload">📁 Upload</button>

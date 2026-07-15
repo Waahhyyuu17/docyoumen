@@ -1041,6 +1041,58 @@ body {
   box-shadow: 0 4px 16px rgba(99,102,241,0.4);
 }
 
+/* ─── ELEMENT EDIT BAR ────────────────────────── */
+.element-edit-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(99,102,241,0.3);
+  border-radius: var(--radius-sm);
+}
+
+.element-edit-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #a5b4fc;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.element-edit-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.btn-save-el,
+.btn-delete-el {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-save-el {
+  background: var(--accent);
+  color: white;
+}
+.btn-save-el:hover { background: var(--accent-hover); }
+
+.btn-delete-el {
+  background: rgba(239,68,68,0.12);
+  color: #fca5a5;
+}
+.btn-delete-el:hover { background: rgba(239,68,68,0.22); }
+
 /* ─── SIGNATURE TABS ─────────────────────────── */
 .sig-tabs {
   display: flex;
@@ -1527,6 +1579,8 @@ body {
 
 .ec-btn:hover { background: var(--surface2); color: var(--text); }
 .ec-btn.delete:hover { color: #fca5a5; background: rgba(239,68,68,0.1); }
+.ec-btn.save { color: #a5b4fc; }
+.ec-btn.save:hover { color: white; background: var(--accent); }
 
 /* Resize handle */
 .resize-handle {
