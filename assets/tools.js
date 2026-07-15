@@ -556,9 +556,43 @@ async function loadPageNumFile(file) {
   }
 }
 
+// ─── NUMBER STYLE HELPERS ─────────────────────
+function toRomanNumeral(num) {
+  const map = [
+    [1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],
+    [100,'C'],[90,'XC'],[50,'L'],[40,'XL'],
+    [10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I'],
+  ];
+  let result = '', n = num;
+  for (const [val, sym] of map) {
+    while (n >= val) { result += sym; n -= val; }
+  }
+  return result || String(num);
+}
+function toAlphabetic(num) {
+  let result = '', n = num;
+  while (n > 0) {
+    const rem = (n - 1) % 26;
+    result = String.fromCharCode(97 + rem) + result;
+    n = Math.floor((n - 1) / 26);
+  }
+  return result || String(num);
+}
+function formatPageNumber(num, style) {
+  switch (style) {
+    case 'roman-lower':   return toRomanNumeral(num).toLowerCase();
+    case 'roman-upper':   return toRomanNumeral(num);
+    case 'alpha-lower':   return toAlphabetic(num);
+    case 'alpha-upper':   return toAlphabetic(num).toUpperCase();
+    case 'arabic-padded': return String(num).padStart(2, '0');
+    default:              return String(num);
+  }
+}
+
 async function runPageNum() {
   if (!pagenumState.pdfDoc) return;
   const position = document.getElementById('pagenumPosition').value;
+  const style = document.getElementById('pagenumStyle').value;
   const format = document.getElementById('pagenumFormat').value.trim() || 'Halaman {n} dari {total}';
   const startFrom = parseInt(document.getElementById('pagenumStart').value) || 1;
 
@@ -568,12 +602,13 @@ async function runPageNum() {
     const font = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
     const pages = pdfDoc.getPages();
     const total = pages.length;
+    const totalStr = formatPageNumber(total, style);
     const fontSize = 10, margin = 28;
 
     pages.forEach((page, i) => {
       const { width, height } = page.getSize();
       const num = i + startFrom;
-      const text = format.replace(/\{n\}/g, num).replace(/\{total\}/g, total);
+      const text = format.replace(/\{n\}/g, formatPageNumber(num, style)).replace(/\{total\}/g, totalStr);
       const textWidth = font.widthOfTextAtSize(text, fontSize);
       let x, y;
       switch (position) {

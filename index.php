@@ -881,6 +881,17 @@ foreach ($simpleConverters as $c): ?>
             </select>
           </div>
           <div class="panel-section">
+            <label class="panel-label">Gaya Nomor</label>
+            <select class="panel-select" id="pagenumStyle">
+              <option value="arabic" selected>1, 2, 3...</option>
+              <option value="arabic-padded">01, 02, 03...</option>
+              <option value="roman-lower">i, ii, iii...</option>
+              <option value="roman-upper">I, II, III...</option>
+              <option value="alpha-lower">a, b, c...</option>
+              <option value="alpha-upper">A, B, C...</option>
+            </select>
+          </div>
+          <div class="panel-section">
             <label class="panel-label">Format (gunakan {n} & {total})</label>
             <input type="text" class="panel-textarea" id="pagenumFormat" style="min-height:auto;" value="Halaman {n} dari {total}">
           </div>
