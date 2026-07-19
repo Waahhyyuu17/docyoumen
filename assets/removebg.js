@@ -22,7 +22,7 @@ const removeBgState = {
   segmenter: null,
 };
 
-document.addEventListener('DOMContentLoaded', setupRemoveBgTool);
+onDomReady(setupRemoveBgTool);
 
 function setupRemoveBgTool() {
   const dropzone = document.getElementById('removeBgDropzone');

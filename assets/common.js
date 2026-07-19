@@ -15,6 +15,17 @@ function showToast(msg, type = '') {
 function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+// DOMContentLoaded tidak akan pernah terpicu kalau event itu sudah lewat
+// sebelum listener-nya terpasang (bisa terjadi kalau load lambat/ada redirect
+// di depannya) — jadi jalankan langsung kalau DOM sudah siap.
+function onDomReady(fn) {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', fn);
+  } else {
+    fn();
+  }
+}
+
 function formatFileSize(bytes) {
   if (bytes < 1024) return bytes + ' B';
   if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';

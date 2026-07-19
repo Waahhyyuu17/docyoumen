@@ -35,7 +35,7 @@ const CONVERTERS = [
   },
 ];
 
-document.addEventListener('DOMContentLoaded', () => {
+onDomReady(() => {
   CONVERTERS.forEach(setupConverterTool);
 });
 

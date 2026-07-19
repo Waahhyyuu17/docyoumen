@@ -6,7 +6,7 @@
 ═══════════════════════════════════════════════ */
 'use strict';
 
-document.addEventListener('DOMContentLoaded', () => {
+onDomReady(() => {
   setupCompareDocTool();
   setupAiCheckTool();
 });

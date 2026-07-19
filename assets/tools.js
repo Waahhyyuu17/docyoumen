@@ -5,7 +5,7 @@
 ═══════════════════════════════════════════════ */
 'use strict';
 
-document.addEventListener('DOMContentLoaded', () => {
+onDomReady(() => {
   setupToolGrid();
   setupToolSearch();
   setupSplitTool();

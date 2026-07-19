@@ -61,7 +61,7 @@ const dom = {
 };
 
 // ─── INIT ─────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
+onDomReady(() => {
   setupUploadZone();
   setupToolTabs();
   setupSigTabs();

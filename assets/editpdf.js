@@ -13,7 +13,7 @@ const editTextState = {
   edits: new Map(), // page -> Map(itemIndex -> newText)
 };
 
-document.addEventListener('DOMContentLoaded', () => {
+onDomReady(() => {
   setupEditTextTool();
 });
 
